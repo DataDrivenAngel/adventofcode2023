@@ -52,6 +52,11 @@ def digit_finder(input_string, digit_dict):
             pos = input_string.find(digit)
             number = digit_dict[digit]
             location_dict.update({pos:number})
+            d_count = input_string.count(digit)
+            if d_count > 1:
+                for n in range(1,d_count):
+                    pos = input_string.find(digit, pos+1)
+                    location_dict.update({pos:number})
     return(location_dict) 
 
 
@@ -77,3 +82,4 @@ print(total_sum)
 # 56136 is incorrect
 # 55060 is incorrect
 # 'eighteight9dnvcqznjvfpreight' is so rude
+# 55093  is correct woohoo

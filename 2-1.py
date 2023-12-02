@@ -42,7 +42,7 @@ def game_validator(game,filters):
     # if none of the max pulls are higher than the filter values, than the game is valid.
     validity = True
     for key in max_pulls.keys():
-        if max_pulls[key] > filters[key]:
+        if int(max_pulls[key]) > int(filters[key]):
             validity = False
 
     
@@ -50,8 +50,8 @@ def game_validator(game,filters):
 
 valid_id_sum = 0
 for game in data:
-    validity, id, pulls = game_validator(game,filter)
+    validity, game_id, pulls = game_validator(game,filter)
     if validity == True:
-        valid_id_sum = valid_id_sum + id
+        valid_id_sum = valid_id_sum + game_id
 
 print(valid_id_sum)

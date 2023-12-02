@@ -27,10 +27,10 @@
 text = open("2-1.txt",'r')
 data = text.read().split('\n')
 
-filter = [12,13,14]
+filter_dict = [12,13,14]
 
 
-def game_validator(game,filters):
+def game_validator(game,filter_dict):
     game_data = game.replace(';',',').split(':')
     game_id = int(''.join(char for char in game_data[0] if char.isdigit()))
     hands = game_data[1].split(',')
@@ -42,7 +42,7 @@ def game_validator(game,filters):
     # if none of the max pulls are higher than the filter values, than the game is valid.
     validity = True
     for key in max_pulls.keys():
-        if int(max_pulls[key]) > int(filters[key]):
+        if int(max_pulls[key]) > int(filter_dict[key]):
             validity = False
 
     
@@ -50,7 +50,7 @@ def game_validator(game,filters):
 
 valid_id_sum = 0
 for game in data:
-    validity, game_id, pulls = game_validator(game,filter)
+    validity, game_id, pulls = game_validator(game,filter_dict)
     if validity == True:
         valid_id_sum = valid_id_sum + game_id
 

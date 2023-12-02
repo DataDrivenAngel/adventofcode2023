@@ -37,20 +37,22 @@ def game_validator(game,filter_dict):
     hands = [x.strip() for x in hands]
     hands = [x.split(' ') for x in hands]
     max_pulls = dict()
+
     for pull in hands:
-        max_pulls.update({pull[1]:int(pull[0])})
+        if pull[1] not in max_pulls or int(pull[0]) > max_pulls[pull[1]]:
+            max_pulls.update({pull[1]:int(pull[0])})
     # if none of the max pulls are higher than the filter values, than the game is valid.
     validity = True
     for key in max_pulls.keys():
-        if int(max_pulls[key]) > int(filter_dict[key]):
+        if max_pulls[key] > filter_dict[key]:
             validity = False
 
     
-    return(validity, game_id, max_pulls)
+    return(validity, game_id, max_pulls, hands)
 
 valid_id_sum = 0
 for game in data:
-    validity, game_id, pulls = game_validator(game,filter_dict)
+    validity, game_id, pulls, hands = game_validator(game,filter_dict)
     if validity == True:
         valid_id_sum = valid_id_sum + game_id
 

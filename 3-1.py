@@ -124,3 +124,5 @@ total = 0
 for part in valid_parts:
     total = total + part
 print(total)
+
+## 522726 is correct!
